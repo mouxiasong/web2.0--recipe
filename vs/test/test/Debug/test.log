@@ -1,0 +1,108 @@
+﻿生成启动时间为 2015/9/15 19:18:10。
+     1>项目“C:\Users\Administrator\Desktop\vs\test\test\test.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\test.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt "幂集2.cpp"
+         幂集2.cpp
+       ResourceCompile:
+         所有输出均为最新。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Administrator\Desktop\vs\test\Debug\test.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\test.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Administrator\Desktop\vs\test\Debug\test.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Desktop\vs\test\Debug\test.lib" /MACHINE:X86 Debug\test.res
+         "Debug\幂集2.obj"
+     1>LINK : fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏
+     1>已完成生成项目“C:\Users\Administrator\Desktop\vs\test\test\test.vcxproj”(build 个目标)的操作 - 失败。
+
+项目性能摘要:
+     1060 毫秒  C:\Users\Administrator\Desktop\vs\test\test\test.vcxproj   1 次调用
+               1060 毫秒  build                                      1 次调用
+
+目标性能摘要:
+        0 毫秒  _SelectedFiles                             1 次调用
+        0 毫秒  _PrepareForBuild                           1 次调用
+        0 毫秒  _Midl                                      1 次调用
+        0 毫秒  SelectClCompile                            1 次调用
+        0 毫秒  AfterBuildGenerateSources                  1 次调用
+        0 毫秒  ComputeManifestGeneratedLinkerInputs       1 次调用
+        0 毫秒  ResolveReferences                          1 次调用
+        0 毫秒  SelectCustomBuild                          1 次调用
+        0 毫秒  ComputeMIDLGeneratedCompileInputs          1 次调用
+        0 毫秒  BeforeResourceCompile                      1 次调用
+        0 毫秒  AfterMidl                                  1 次调用
+        0 毫秒  _GenerateXMLData                           1 次调用
+        0 毫秒  _ClCompile                                 1 次调用
+        0 毫秒  GetReferenceAssemblyPaths                  1 次调用
+        0 毫秒  CreateCustomManifestResourceNames          1 次调用
+        0 毫秒  BuildCompileTraverse                       1 次调用
+        0 毫秒  AfterResourceCompile                       1 次调用
+        0 毫秒  _Xsd                                       1 次调用
+        0 毫秒  MakeDirsForResourceCompile                 1 次调用
+        0 毫秒  GetFrameworkPaths                          1 次调用
+        0 毫秒  ComputeCLInputPDBName                      1 次调用
+        0 毫秒  BuildGenerateSources                       1 次调用
+        0 毫秒  _DetermineManagedStateFromCL               1 次调用
+        0 毫秒  _ResourceCompile                           1 次调用
+        0 毫秒  GetInstalledSDKLocations                   1 次调用
+        0 毫秒  SelectResourceCompile                      1 次调用
+        0 毫秒  ExpandSDKReferences                        1 次调用
+        0 毫秒  ComputeRCOutputs                           1 次调用
+        0 毫秒  ComputeLinkInputsFromProject               1 次调用
+        0 毫秒  BuildLinkTraverse                          1 次调用
+        0 毫秒  ComputeManifestInputsTargets               1 次调用
+        0 毫秒  PreLinkEvent                               1 次调用
+        0 毫秒  BeforeClCompile                            1 次调用
+        0 毫秒  ComputeCLOutputs                           1 次调用
+        0 毫秒  _SplitProjectReferencesByFileExistence     1 次调用
+        0 毫秒  BuildGenerateSourcesTraverse               1 次调用
+        0 毫秒  PrepareResourceNames                       1 次调用
+        0 毫秒  AfterBuildGenerateSourcesEvent             1 次调用
+        0 毫秒  MakeDirsForMidl                            1 次调用
+        0 毫秒  ResolveSDKReferences                       1 次调用
+        0 毫秒  ComputeCLGeneratedLinkInputs               1 次调用
+        0 毫秒  AfterResolveReferences                     1 次调用
+        0 毫秒  BeforeResolveReferences                    1 次调用
+        0 毫秒  PreBuildEvent                              1 次调用
+        0 毫秒  PlatformPrepareForBuild                    1 次调用
+        0 毫秒  BeforeLink                                 1 次调用
+        0 毫秒  AfterClCompile                             1 次调用
+        0 毫秒  AfterBuildCompileEvent                     1 次调用
+        0 毫秒  BeforeBuildGenerateSources                 1 次调用
+        0 毫秒  MakeDirsForLink                            1 次调用
+        0 毫秒  ComputeRCGeneratedLinkInputs               1 次调用
+        0 毫秒  BuildCompile                               1 次调用
+        0 毫秒  AssignProjectConfiguration                 1 次调用
+        0 毫秒  _GenerateWebServiceProxy                   1 次调用
+        1 毫秒  ComputeCustomBuildOutput                   1 次调用
+        1 毫秒  PrepareForBuild                            1 次调用
+        1 毫秒  DoLinkOutputFilesMatch                     1 次调用
+        1 毫秒  SetBuildDefaultEnvironmentVariables        1 次调用
+        1 毫秒  ComputeReferenceCLInput                    1 次调用
+        1 毫秒  AssignTargetPaths                          1 次调用
+        1 毫秒  ResolveProjectReferences                   1 次调用
+        1 毫秒  MakeDirsForCl                              1 次调用
+        1 毫秒  SplitResourcesByCulture                    1 次调用
+        2 毫秒  ResourceCompile                            1 次调用
+        3 毫秒  ResolveAssemblyReferences                  1 次调用
+        3 毫秒  InitializeBuildStatus                      1 次调用
+        5 毫秒  _CheckForInvalidConfigurationAndPlatform   1 次调用
+      339 毫秒  Link                                       1 次调用
+      697 毫秒  ClCompile                                  1 次调用
+
+任务性能摘要:
+        0 毫秒  AssignCulture                              1 次调用
+        0 毫秒  AssignProjectConfiguration                 1 次调用
+        0 毫秒  Message                                    2 次调用
+        0 毫秒  ReadLinesFromFile                          1 次调用
+        1 毫秒  SetEnv                                     4 次调用
+        1 毫秒  WriteLinesToFile                           2 次调用
+        1 毫秒  Touch                                      1 次调用
+        1 毫秒  AssignTargetPath                           4 次调用
+        2 毫秒  MakeDir                                    7 次调用
+        2 毫秒  RC                                         1 次调用
+        3 毫秒  ResolveAssemblyReference                   1 次调用
+      338 毫秒  Link                                       1 次调用
+      697 毫秒  CL                                         1 次调用
+
+生成失败。
+
+已用时间 00:00:01.05

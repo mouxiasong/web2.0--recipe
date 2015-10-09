@@ -1,0 +1,49 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+void Index_BF(char S[],char T[],int pos){//main string is s,substring is T
+  int i=pos,j=0;
+  while(S[i+j]!='\0'&& T[j]!='\0')
+	  if(S[i+j]==T[j])
+		  j++;// compare the next characor
+	  else
+	  {
+		  i++;
+		  j=0;// restart a new match routinue
+	  }
+	  if(T[j]=='\0')
+		  cout<<i<<endl;
+	  else
+		  cout<<"no solution"<<endl;
+}
+
+int main(){
+	int t1,k;
+	
+	while(cin>>t1){
+		char *S1=new char[t1+1];
+		int i;
+	for(i=0;i<t1;i++){
+		char c;
+		cin >> c;
+		S1[i] = c;//the original string
+	}
+	S1[i] = '\0';
+	int t2;
+	cin>>t2;
+	char* s2=new char[t2+1];
+	for(i=0;i<t2;i++){
+		cin>>s2[i];//the match string
+	}
+	s2[i] = '\0';
+	if(t1>t2){
+	cout<<"no solution"<<endl;
+	}else{
+		Index_BF(s2,S1,0);
+	  }
+	delete []S1;
+      delete []s2;
+     }
+	system("pause");
+	return 0;
+	}

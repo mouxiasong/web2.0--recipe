@@ -1,0 +1,21 @@
+Description
+
+Write a program:
+1. to read in a line of text with a decimal integer at its beginning,
+2. to output the original line with the integer displayed in its octal format( with 0 as its initial letter like 012 for the decimal integer 10).
+The accepted input looks like ¡±12345abcdef¡± or ¡°345¡± or ¡°189years¡± or ¡°123 years to live¡±. It is supposed that the length of the input is less than 128.
+Input
+
+a line of text with a decimal integer at its beginning
+Output
+
+the original line with the integer displayed in its octal format
+Sample Input
+
+123Hello
+
+Sample Output
+
+0173Hello
+
+ftp;//172.18.96.39

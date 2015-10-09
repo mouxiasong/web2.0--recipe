@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct
+{
+char name[10];
+int age;
+}RECORD_STRUCT;
+int main()
+{
+int num_read = 0;
+RECORD_STRUCT array[2];
+FILE *file_stream = fopen("recfile", "r");
+if (file_stream == NULL)
+{  
+   perror("Open file recfile");
+   exit(1);
+}
+
+num_read = fread(array, sizeof(RECORD_STRUCT), 2, file_stream);
+if ( 0 == num_read)
+{
+   perror("read file field.\n");
+}
+else
+{
+   printf("%d items read. \n",num_read);
+   printf("Name1: %s\tAge1: %d\n", array[0].name, array[0].age);
+   printf("Name2: %s\tAge2: %d\n", array[1].name, array[1].age);
+}
+  
+fclose(file_stream);
+return 0;
+}

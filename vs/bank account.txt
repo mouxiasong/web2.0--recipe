@@ -1,0 +1,264 @@
+main
+#include "Account.h"
+#include "AccountManager.h"
+#include <iostream>
+#include <string>
+using std::cout;
+using std::cin;
+using std::string;
+using std::endl;
+ 
+int main() {
+  string *name;  // name pointer
+  int count;  // the number of accounts;
+  int *balance;  // balance pointer
+  AccountManager am;  // account manager
+ 
+  am.caculateInterest();  // no accounts
+  cout << endl;
+ 
+  cin >> count;
+  name = new string[count];
+  balance = new int[count / 2];
+ 
+  for (int i = 0; i < count; i++) {
+    cin >> name[i];
+  }
+  // half of them construct with balance;
+  for (int i = 0; i < count/2; i++) {
+    cin >> balance[i];
+    am.createAccount(name[i], balance[i]);
+  }
+  // the others construct without balance;
+  for (int i = count / 2; i < count; i++) {
+    am.createAccount(name[i]);
+  }
+  // finish create account;
+ 
+  if (am.getAccount(5) == NULL) {
+    cout << "Error operation!" << endl;
+  } else {
+    Account* temp = am.getAccount(5);
+    cout << temp->getName() << endl;
+    cout << temp->getBalance() << endl;
+    temp->deposit(100);
+    temp->deposit(-5);
+    temp->withdraw(-5);
+    if (temp->withdraw(200)) {
+      cout << "TRUE" << endl;
+    } else {
+      cout << "FALSE" << endl;
+    }
+  }
+ 
+  am.caculateInterest();
+  // output all logs.
+  for (int i = 0; i < Account::getCount(); i++) {
+    cout << am.getAccount(i)->getLog() << endl;
+  }
+ 
+  delete []name;
+  delete []balance;
+  return 0;
+}
+
+Account.h
+
+
+    #ifndef _ACCOUNT_H_
+    #define _ACCOUNT_H_
+     
+    #include <iostream>
+    using std::string;
+     
+    class Account {
+     public:
+      static int getCount();
+     
+      explicit Account(const string& name);
+      Account(const string& name, int balance);
+      ~Account();
+      void deposit(int amount);
+      bool withdraw(int amount);
+     
+      // inline function
+      inline const string& getName() const {
+        return name_;
+      }
+      inline int getBalance() const {
+        return balance_;
+      }
+      inline const string& getLog() const {
+        return log_;
+      }
+     
+     private:
+      string name_;
+      int balance_;
+      string log_;
+     
+      string intToStr(int target);
+     
+      static int count_;
+    };
+     
+    #endif  // _ACCOUNT_H_
+
+Account.cpp
+#include "Account.h"
+#include <iostream>
+#include <string>
+using std::string;
+ 
+// static member
+int Account::count_ = 0;
+int Account::getCount() {
+  return count_;
+}
+ 
+// private function
+string Account::intToStr(int target) {
+  string temp;
+  while (target) {
+    temp.push_back(target % 10 + '0');
+    target /= 10;
+  }
+  string str;
+  for (int i = temp.size() - 1; i >= 0; i--) {
+    str.push_back(temp[i]);
+  }
+  return str;
+}
+ 
+// Constructor
+Account::Account(const string& name) {
+  count_++;
+  name_ = name;
+  balance_ = 0;
+  log_ += "Create an account "+name+"\n";
+}
+ 
+// Constructor
+Account::Account(const string& name, int balance) {
+  count_++;
+  name_ = name;
+  balance_ = balance;
+  log_ += "Create an account "+name+"\n";
+}
+ 
+// Destructor
+Account::~Account() {
+  count_--;
+}
+ 
+// function deposit
+void Account::deposit(int amount) {
+  if (amount < 0) {
+    std::cout << "Error operation!" << std::endl;
+    log_ += "Error operation!\n";
+    return;
+  }
+  balance_ += amount;
+  // deal with the zero
+  log_ += "Deposit " + (amount == 0 ? "0" : intToStr(amount)) +" yuan\n";
+}
+ 
+// function withdraw
+bool Account::withdraw(int amount) {
+  if (amount < 0) {
+    std::cout << "Error operation!" << std::endl;
+    log_ += "Error operation!\n";
+    return false;
+  } else if (balance_ >= amount) {
+    balance_ -= amount;
+    log_ += "Withdraw " + intToStr(amount) +" yuan\n";
+    return true;
+  } else {
+    std::cout << "You don't have enough money!" << std::endl;
+    log_ += "Error operation!\n";
+    return false;
+  }
+}
+Accountmanager.h
+#ifndef _ACCOUNTMANAGER_H_
+#define _ACCOUNTMANAGER_H_
+ 
+#include "Account.h"
+#include <iostream>
+using std::string;
+ 
+class AccountManager {
+ public:
+  void createAccount(const string& name);
+  void createAccount(const string& name, int balance);
+  void caculateInterest();
+  Account* getAccount(int position);
+  ~AccountManager();  // remember to delete all account pointers
+ 
+ private:
+  Account* accounts_[10];
+  static double interest_rate_;  // Please set 0.05
+};
+ 
+#endif  // _ACCOUNTMANAGER_H_
+
+AccountManager.cpp
+#include "AccountManager.h"
+#include "Account.h"
+#include <iostream>
+#include <string>
+using std::cout;
+using std::endl;
+using std::string;
+ 
+// static
+double AccountManager::interest_rate_ = 0.05;
+ 
+// function createAccount;
+void AccountManager::createAccount(const string& name) {
+  int count = Account::getCount();
+  if (count < 10) {
+    accounts_[count] = new Account(name);
+  }
+}
+ 
+void AccountManager::createAccount(const string& name,
+                                   int balance) {
+  int count = Account::getCount();
+  if (count < 10) {
+    accounts_[count] = new Account(name, balance);
+  }
+}
+ 
+// function caculateInterest;
+void AccountManager::caculateInterest() {
+  int count = Account::getCount();
+  if (count == 0) {
+    cout << "Not any account!" << endl;
+    return;
+  }
+  for (int i = 0; i < count; i++) {
+    accounts_[i]->deposit(accounts_[i]->getBalance() * interest_rate_);
+  }
+}
+ 
+// function getAccount
+// return NULL if the position is invalid
+Account* AccountManager::getAccount(int position) {
+  int count = Account::getCount();
+  if (position < count && position >= 0) {
+    return accounts_[position];
+  } else {
+    cout << "Error operation!" << endl;
+    return NULL;
+  }
+}
+ 
+// Destructor
+// Delete all account pointer
+AccountManager::~AccountManager() {
+  int count = Account::getCount();
+  for (int i = 0; i < count; i++) {
+    delete accounts_[i];
+  }
+}

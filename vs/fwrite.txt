@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct
+{
+char name[10];
+int age;
+}RECORD_STRUCT;
+
+int main()
+{
+int num_written = 0;
+RECORD_STRUCT array[2] =
+{
+   {"Ken", 24},
+   {"Knuth", 28}
+};
+FILE *file_stream = fopen("recfile", "w");
+if (file_stream == NULL)
+{  
+   perror("Open file recfile");
+   exit(1);
+}
+num_written = fwrite(array, sizeof(RECORD_STRUCT), 2, file_stream);
+if (0 == num_written)
+{
+   perror("can not write file recfile");
+}
+else
+{
+   printf("%d items written",num_written);
+}
+fclose(file_stream);
+return 0;
+}

@@ -1,0 +1,82 @@
+#include <iostream>
+#include <iomanip>
+#include<stdlib.h>
+using namespace std;
+
+typedef struct tagTEST
+{
+ char Name[40];
+ int  Size;
+ int  Array[200];
+}TEST,*PTEST;
+
+void OutPut(TEST *S)
+{
+ cout<<"Struct Name is :"<<S->Name<<endl;
+ cout<<"Struct Size is :"<<S->Size<<endl;
+ cout<<"Struct Datas:"<<endl;
+ for(int i=0;i<200;)
+ {
+  cout<<setw(8)<<S->Array[i];
+        if(++i%8==0)
+   cout<<endl;
+ }
+ cout<<endl;
+}
+int main( int argc,char *argv[])
+{
+ TEST myTest;
+ strcpy(myTest.Name,"A Single write and read file example");
+ myTest.Size=sizeof(TEST);
+ for(int i=0;i<200;i++)
+  myTest.Array[i]=i;
+ //这里用来显示写文件前的数据，查看写前与后面读来是否一致
+    OutPut(&myTest);
+ //写文件
+    FILE *fp;
+ //打开文件,"w+",Opens an empty file for both reading and writing.
+ //If the given file exists, its contents are destroyed
+    //以二进制方式读写，而不是文本方式，打开文件的时候，二进制模式把换行处理为"/n",
+ //二进制模式找开，换行处理为两个字节。
+ if((fp=fopen("D://myTest.out","wb+"))==NULL)
+ {
+  cout<<"不能创建文件"<<endl;
+  return -1;
+ }
+ fwrite((const void*)&myTest,sizeof(myTest),1,fp);
+ float OtherData[500];
+ //再写另外的数据在结构体后面
+ for(int i=0;i<500;i++)
+  OtherData[i]=i*2;
+ fwrite((const void*)OtherData,sizeof(OtherData),1,fp);
+ fclose(fp);
+
+ //以下用来读文件　。
+    cout<<"********************以下是读的数据*******************"<<endl;
+ FILE *fr;
+ fr=fopen("D://myTest.out","rb+");
+ if(fr==NULL)
+ {
+  cout<<"没有找到文件!"<<endl;
+  return -1;
+ }
+ TEST myRead;
+ fread((void*)&myRead,sizeof(myRead),1,fr);
+ float Temp[500];//用来存放读出的数据。
+ fread((void*)Temp,sizeof(Temp),1,fr);
+ fclose(fr);
+ //以下是显示读到是否正确。
+ cout<<myRead.Name<<endl;
+ cout<<myRead.Size<<endl;
+ OutPut(&myRead);
+ cout<<"*********************这是结果体后面的数据**********************"<<endl;
+ for (int i=0;i<500;)
+ {
+  cout<<setw(8)<<Temp[i];
+  if(++i%8==0)
+   cout<<endl;
+ }
+ cout<<endl;
+ system("pause");
+    return 0;
+}

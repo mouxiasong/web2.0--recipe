@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //  用二维数组存储每个数，i 个月后兔子总数存储在 a[i] 中
+    //  a[i][j]表示 i 个月后兔子总数从右往左数第 110 - j 位的数字
+    int m, d, a[110][110];
+    while (1)
+    {
+        cin >> m >>d;
+        if (m == 0 && d == 0)
+            break;
+        //  初始化
+        for (int i = 0; i < 110; i++)
+            for (int j = 0; j < 110; j++)
+                a[i][j] = 0;
+        for (int i = 0; i <= m; i++)
+            a[i][109] = i + 1;
+        //  递推
+        for (int i = m + 1; i <= d; i++)
+        {
+            //  高精度加法
+            for (int j = 109; j >= 0; j--)
+            {
+                a[i][j] += a[i - 1][j] + a[i - m][j];
+                //  处理进位
+                if (a[i][j] > 9)
+                {
+                    a[i][j - 1] += a[i][j] / 10;
+                    a[i][j] %= 10;
+                }
+            }
+        }
+        //  输出结果，排除前面的 0
+        for (int i = 0; i < 110; i++)
+            if (a[d][i] != 0)
+            {
+                for (int j = i; j < 110; j++)
+                    cout << a[d][j];
+                break;
+            }
+        cout << endl;
+    }
+    return 0;
+}

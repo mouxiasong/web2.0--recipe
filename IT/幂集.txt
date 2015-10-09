@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+#include<list>
+
+void recursion(int n, list<int> item) {
+    if (n == 0) {
+        bool flag = 0;
+        cout << "{";
+        while (!item.empty()) {
+            if (flag != 0) {
+                cout << ",";
+            }
+            flag = 1;
+            cout << item.front();
+            item.pop_front();
+        }
+        cout << "}" << endl;
+        return; 
+    }
+        for (int i = 0; i < n; i++) {
+            if (i) item.push_back(i);
+            recursion(i, item);
+            if (i) item.pop_back();
+    
+    }
+}
+
+int main() {
+    int t;
+    cin >> t;
+    int n;
+    while (t--) {
+        cin >> n;
+        list<int> item;
+        item.clear();
+        recursion(n + 1, item);
+    }
+}                    
